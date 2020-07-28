@@ -16,8 +16,11 @@ export class BookListComponent implements OnInit {
       name: 'Brújula...',
       author: 'Diana Uribe',
       imageUrl:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRs-E7SvsMUWxDH06wyfr9JkRkhxVFoATm3yQ&usqp=CAU',
+        'https://www.elpais.com.co/files/article_content_half/uploads/2018/11/30/5c01cbc9ce581.jpeg',
     };
+    this.addNewBook(newBook);
+    this.addNewBook(newBook);
+    this.addNewBook(newBook);
     this.addNewBook(newBook);
   }
 

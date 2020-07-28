@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-action-icon',
@@ -7,8 +8,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ActionIconComponent implements OnInit {
   @Input() icon: string = '';
+  @Input() pathUrl: string = '';
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  onClick() {
+    this.router.navigate([this.pathUrl]);
+  }
 }

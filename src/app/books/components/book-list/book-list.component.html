@@ -1,1 +1,14 @@
-<p>book-list works!</p>
+<app-header title="Share book"></app-header>
+<app-action-icon icon="+" pathUrl="create"></app-action-icon>
+
+<div class="container">
+  <div class="row">
+    <div *ngFor="let book of bookList" class="col-md-3">
+      <app-card
+        [name]="book.name"
+        [imageUrl]="book.imageUrl"
+        [author]="book.author"
+      ></app-card>
+    </div>
+  </div>
+</div>
