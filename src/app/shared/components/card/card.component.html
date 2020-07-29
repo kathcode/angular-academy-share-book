@@ -3,5 +3,10 @@
   <div class="card-body">
     <div class="card-title title">{{ name }}</div>
     <div class="card-text">Author: {{ author }}</div>
+    <a
+      [routerLink]="['/detail', id]"
+      class="btn btn-light mt-3 btn-lg btn-block"
+      >View detail</a
+    >
   </div>
 </div>

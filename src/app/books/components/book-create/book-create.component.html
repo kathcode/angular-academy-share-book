@@ -1,3 +1,38 @@
 <app-header title="Share book"></app-header>
 <app-action-icon icon="x" pathUrl=""></app-action-icon>
-<p>book-add works!</p>
+<div class="container">
+  <h3>Add new book</h3>
+  <form (submit)="onSubmit()">
+    <div class="form-group">
+      <input
+        [(ngModel)]="name"
+        class="form-control"
+        name="name"
+        id="name"
+        placeholder="Book name"
+      />
+    </div>
+
+    <div class="form-group">
+      <input
+        [(ngModel)]="author"
+        class="form-control"
+        id="author"
+        name="author"
+        placeholder="Book author"
+      />
+    </div>
+
+    <div class="form-group">
+      <input
+        [(ngModel)]="imageUrl"
+        class="form-control"
+        id="link"
+        name="imageUrl"
+        placeholder="Image link"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add</button>
+  </form>
+</div>

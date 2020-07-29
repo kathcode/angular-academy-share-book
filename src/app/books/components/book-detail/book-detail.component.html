@@ -1,0 +1,9 @@
+<app-header title="Share book"></app-header>
+<app-action-icon icon="+" pathUrl="create"></app-action-icon>
+<h1>Detail</h1>
+<app-card
+  *ngIf="book"
+  [name]="book.author"
+  [imageUrl]="book.imageUrl"
+  [author]="book.author"
+></app-card>
