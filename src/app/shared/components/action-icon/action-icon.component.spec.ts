@@ -1,25 +1,29 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ActionIconComponent } from './action-icon.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { Router } from '@angular/router';
 
-describe('ActionIconComponent', () => {
-  let component: ActionIconComponent;
-  let fixture: ComponentFixture<ActionIconComponent>;
+let component: ActionIconComponent;
+let fixture: ComponentFixture<ActionIconComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ActionIconComponent ]
-    })
-    .compileComponents();
-  }));
-
+describe('Action icon tests', () => {
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [ActionIconComponent],
+      imports: [AppRoutingModule],
+    });
     fixture = TestBed.createComponent(ActionIconComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should change the path url when click the button', async () => {
+    spyOn(component, 'onClick');
+    component.pathUrl = '/';
+    const btn = fixture.debugElement.nativeElement.querySelector('a');
+    btn.click();
+
+    fixture.whenStable().then(() => {
+      expect(component.onClick).toHaveBeenCalled();
+    });
   });
 });
