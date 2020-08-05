@@ -3,6 +3,18 @@
 
 <div class="container">
   <div class="row">
+    <div class="col mt-4 mb-4">
+      <div class="input-group">
+        <input type="text" class="form-control" [(ngModel)]="searchTerm" />
+        <div class="input-group-append">
+          <button (click)="onChangeSearchTerm()" class="input-group-text">
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div *ngFor="let book of bookList$ | async" class="col-md-3">
       <app-card
         [name]="book.name"

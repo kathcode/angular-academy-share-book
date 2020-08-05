@@ -24,10 +24,20 @@ export class BooksManagerService {
   }
 
   removeBook(indexPosition: string) {
+    // DOC: get document path
     this.fireStore.collection('books').doc(indexPosition).delete();
   }
 
   getBookByPosition(indexPosition: number) {
     return this.bookList$.getValue()[indexPosition];
+  }
+
+  getBookByName(name: string) {
+    this.fireStore
+      .collection('books', (ref) => ref.where('name', '==', name + '\uf8ff'))
+      .valueChanges()
+      .subscribe((books: IBook[]) => {
+        this.bookList$.next(books);
+      });
   }
 }

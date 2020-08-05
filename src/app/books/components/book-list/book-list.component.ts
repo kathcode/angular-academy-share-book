@@ -14,12 +14,17 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class BookListComponent implements OnInit {
   bookList$ = new BehaviorSubject<IBook[]>([]);
+  searchTerm: string;
 
   constructor(private bookManagerService: BooksManagerService) {
-    bookManagerService.bookList$.subscribe((books) => {
+    bookManagerService.bookList$.subscribe((books: IBook[]) => {
       this.bookList$.next(books);
     });
   }
 
   ngOnInit(): void {}
+
+  onChangeSearchTerm() {
+    this.bookManagerService.getBookByName(this.searchTerm);
+  }
 }
