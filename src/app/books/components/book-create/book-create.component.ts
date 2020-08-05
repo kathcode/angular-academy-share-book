@@ -25,7 +25,8 @@ export class BookCreateComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    const newIndex = this.booksManagerService.getBooks().length;
+    const newIndex = this.booksManagerService.bookList$.getValue().length;
+
     const newBook: IBook = {
       author: this.author,
       name: this.name,

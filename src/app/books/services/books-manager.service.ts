@@ -1,31 +1,43 @@
 import { Injectable } from '@angular/core';
-
-import { IBook } from '../models/book.interface';
 import { BehaviorSubject } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
+
+// Models
+import { IBook } from '../models/book.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BooksManagerService {
-  bookList$ = new BehaviorSubject<IBook[]>([]);
-  constructor() {}
-
-  getBooks() {
-    return this.bookList$.getValue();
+  bookList$ = new BehaviorSubject<Array<IBook>>([]);
+  constructor(private fireStore: AngularFirestore) {
+    fireStore
+      .collection('books')
+      .valueChanges()
+      .subscribe((books: Array<IBook>) => {
+        this.bookList$.next(books);
+      });
   }
 
   addNewBook(newBook: IBook) {
-    this.bookList$.next([...this.getBooks(), newBook]);
+    this.fireStore.collection('books').add(newBook);
   }
 
-  removeBook(indexPosition: number) {
-    this.bookList$.next([
-      ...this.getBooks().slice(0, indexPosition),
-      ...this.getBooks().slice(indexPosition + 1, this.getBooks().length),
-    ]);
+  removeBook(indexPosition: string) {
+    // DOC: get document path
+    this.fireStore.collection('books').doc(indexPosition).delete();
   }
 
   getBookByPosition(indexPosition: number) {
-    return this.getBooks()[indexPosition];
+    return this.bookList$.getValue()[indexPosition];
+  }
+
+  getBookByName(name: string) {
+    this.fireStore
+      .collection('books', (ref) => ref.where('name', '==', name + '\uf8ff'))
+      .valueChanges()
+      .subscribe((books: IBook[]) => {
+        this.bookList$.next(books);
+      });
   }
 }
